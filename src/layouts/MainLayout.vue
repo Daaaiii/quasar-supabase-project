@@ -20,11 +20,11 @@
     </q-header>
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
-      <!-- <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+      <q-list>
+        <q-item-label header> Menu </q-item-label>
 
         <EssentialLink v-for="link in essentialLinks" :key="link.title" v-bind="link" />
-      </q-list> -->
+      </q-list>
     </q-drawer>
 
     <q-page-container>
@@ -35,18 +35,30 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-// import EssentialLink from "components/EssentialLink.vue";
+import EssentialLink from "components/EssentialLink.vue";
 import useAuthUser from "src/composables/UseAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from 'quasar'
 import router from "src/router";
 
+const linksList = [
+  {
+    title: 'Home',
+    icon: 'mdi-home',
+    routeName: 'me'
+  },
+  {
+    title: 'Category',
+    icon: 'mdi-shape-outline',
+    routeName: 'category'
+  },
+]
 
 export default defineComponent({
   name: "MainLayout",
 
   components: {
-    // EssentialLink,
+    EssentialLink,
   },
 
   setup() {
@@ -70,7 +82,7 @@ export default defineComponent({
     }
 
     return {
-      // essentialLinks: linksList,
+      essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
